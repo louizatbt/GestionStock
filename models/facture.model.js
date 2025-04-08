@@ -1,34 +1,34 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
 
-const Produit = sequelize.define('Produit', {
+const Facture = sequelize.define('Facture', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  nom: {
-    type: DataTypes.STRING,
-    allowNull: false,
+  commande_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'commande',
+      key: 'id',
+    },
   },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
-  prix: {
+  montant_total: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  quantite_stock: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+  date_emission: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
   },
-  categorie_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'categorie',
-      key: 'id',
-    },
+  date_echeance: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  statut: {
+    type: DataTypes.ENUM('payée', 'en_attente', 'partiellement_payée'),
+    defaultValue: 'en_attente',
   },
   createdAt: {
     field: 'created_at',
@@ -41,9 +41,11 @@ const Produit = sequelize.define('Produit', {
     defaultValue: DataTypes.NOW,
   },
 }, {
-  tableName: 'produit',
+  tableName: 'facture',
   timestamps: true,
   underscored: true,
 });
 
-export default Produit;
+export default Facture;
+
+

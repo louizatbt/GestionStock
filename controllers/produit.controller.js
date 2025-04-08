@@ -1,38 +1,68 @@
-import Produit from '../models/produit.model.js';
+import Produit from '../models/Produit.js';
+import Categorie from '../models/Categorie.js'; // à créer si pas encore fait
 
-// GET all
-export const getProduits = async (req, res) => {
-  const produits = await Produit.findAll();
-  res.json(produits);
-};
-
-// GET by id
-export const getProduit = async (req, res) => {
-  const produit = await Produit.findByPk(req.params.id);
-  if (produit) res.json(produit);
-  else res.status(404).json({ message: 'Produit non trouvé' });
-};
-
-// POST
+// ➕ Créer un produit
 export const createProduit = async (req, res) => {
-  const nouveauProduit = await Produit.create(req.body);
-  res.status(201).json(nouveauProduit);
+  try {
+    const produit = await Produit.create(req.body);
+    res.status(201).json(produit);
+  } catch (error) {
+    res.status(500).json({ message: "Erreur lors de la création du produit", error });
+  }
 };
 
-// PUT
+// 📥 Lister tous les produits
+export const getAllProduits = async (req, res) => {
+  try {
+    const produits = await Produit.findAll({
+      include: {
+        model: Categorie,
+        attributes: ['id', 'nom'],
+      },
+      order: [['created_at', 'DESC']],
+    });
+    res.json(produits);
+  } catch (error) {
+    res.status(500).json({ message: "Erreur lors de la récupération des produits", error });
+  }
+};
+
+// 🔎 Récupérer un produit par ID
+export const getProduitById = async (req, res) => {
+  try {
+    const produit = await Produit.findByPk(req.params.id, {
+      include: {
+        model: Categorie,
+        attributes: ['id', 'nom'],
+      },
+    });
+    if (!produit) return res.status(404).json({ message: "Produit non trouvé" });
+    res.json(produit);
+  } catch (error) {
+    res.status(500).json({ message: "Erreur lors de la récupération du produit", error });
+  }
+};
+
+// ✏️ Mettre à jour un produit
 export const updateProduit = async (req, res) => {
-  const produit = await Produit.findByPk(req.params.id);
-  if (!produit) return res.status(404).json({ message: 'Introuvable' });
-
-  await produit.update(req.body);
-  res.json(produit);
+  try {
+    const [updated] = await Produit.update(req.body, {
+      where: { id: req.params.id },
+    });
+    if (!updated) return res.status(404).json({ message: "Produit non trouvé" });
+    res.json({ message: "Produit mis à jour avec succès" });
+  } catch (error) {
+    res.status(500).json({ message: "Erreur lors de la mise à jour du produit", error });
+  }
 };
 
-// DELETE
+// 🗑️ Supprimer un produit
 export const deleteProduit = async (req, res) => {
-  const produit = await Produit.findByPk(req.params.id);
-  if (!produit) return res.status(404).json({ message: 'Introuvable' });
-
-  await produit.destroy();
-  res.json({ message: 'Supprimé' });
+  try {
+    const deleted = await Produit.destroy({ where: { id: req.params.id } });
+    if (!deleted) return res.status(404).json({ message: "Produit non trouvé" });
+    res.json({ message: "Produit supprimé avec succès" });
+  } catch (error) {
+    res.status(500).json({ message: "Erreur lors de la suppression du produit", error });
+  }
 };

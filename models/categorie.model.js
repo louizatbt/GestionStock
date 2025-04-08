@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
 
-const Produit = sequelize.define('Produit', {
+const Categorie = sequelize.define('Categorie', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -11,24 +11,13 @@ const Produit = sequelize.define('Produit', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
-  prix: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
-  },
-  quantite_stock: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-  },
-  categorie_id: {
+  categorie_parent_id: {
     type: DataTypes.INTEGER,
     references: {
       model: 'categorie',
       key: 'id',
     },
+    allowNull: true,
   },
   createdAt: {
     field: 'created_at',
@@ -41,9 +30,9 @@ const Produit = sequelize.define('Produit', {
     defaultValue: DataTypes.NOW,
   },
 }, {
-  tableName: 'produit',
+  tableName: 'categorie',
   timestamps: true,
   underscored: true,
 });
 
-export default Produit;
+export default Categorie;
