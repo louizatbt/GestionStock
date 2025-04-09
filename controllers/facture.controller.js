@@ -1,5 +1,5 @@
-import Facture from '../models/Facture.js';
-import Commande from '../models/Commande.js';
+import Facture from '../models/facture.model.js';
+import Commande from '../models/commande.model.js';
 
 // ➕ Créer une facture
 export const createFacture = async (req, res) => {

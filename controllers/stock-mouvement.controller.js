@@ -1,5 +1,5 @@
-import StockMouvement from '../models/StockMouvement.js';
-import Produit from '../models/Produit.js';
+import StockMouvement from '../models/stock-mouvement.model.js';
+import Produit from '../models/produit.model.js';
 
 // ➕ Ajouter un mouvement de stock
 export const createMouvement = async (req, res) => {

@@ -1,10 +1,10 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import Utilisateur from '../models/Utilisateur.js';
+import Utilisateur from '../models/utilisateur.model.js';
 
 // Controller pour l'inscription (Create)
 export const register = async (req, res) => {
-  const { nom, email, mot_de_passe, telephone, adresse } = req.body;
+  const { nom, email, mot_de_passe, telephone, adresse , role } = req.body;
 
   try {
     // Vérifier si l'utilisateur existe déjà
@@ -23,6 +23,7 @@ export const register = async (req, res) => {
       mot_de_passe: hash,
       telephone,
       adresse,
+      role
     });
 
     // Créer un token JWT

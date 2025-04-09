@@ -1,5 +1,5 @@
-import Expeditions from '../models/Expeditions.js';
-import Commande from '../models/Commande.js';
+import Expeditions from '../models/expédition.model.js';
+import Commande from '../models/commande.model.js';
 
 // ➕ Créer une expédition
 export const createExpedition = async (req, res) => {

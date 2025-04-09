@@ -1,5 +1,5 @@
-import Commande from '../models/Commande.js';
-import Utilisateur from '../models/Utilisateur.js'; // si besoin d'inclure le client
+import Commande from '../models/commande.model.js';
+import Utilisateur from '../models/utilisateur.model.js'; // si besoin d'inclure le client
 
 // ➕ Créer une commande
 export const createCommande = async (req, res) => {

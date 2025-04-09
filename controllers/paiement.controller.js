@@ -1,5 +1,5 @@
-import Paiement from '../models/Paiement.js';
-import Facture from '../models/Facture.js';
+import Paiement from '../models/paiement.model.js';
+import Facture from '../models/facture.model.js';
 
 // ➕ Créer un paiement
 export const createPaiement = async (req, res) => {

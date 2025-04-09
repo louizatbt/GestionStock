@@ -1,7 +1,7 @@
 // controllers/avisProduitController.js
-import AvisProduit from '../models/AvisProduit.js';
-import Produit from '../models/Produit.js';
-import Utilisateur from '../models/Utilisateur.js';
+import AvisProduit from '../models/avis-produit.model.js';
+import Produit from '../models/produit.model.js';
+import Utilisateur from '../models/utilisateur.model.js';
 
 // Créer un avis
 export const createAvisProduit = async (req, res) => {

@@ -1,7 +1,7 @@
 // controllers/cartonsController.js
-import Cartons from '../models/Cartons.js';
-import Commande from '../models/Commandes.js'; // à adapter selon ton fichier modèle
-import Produit from '../models/Produits.js';   // à adapter selon ton fichier modèle
+import Cartons from '../models/carton.model.js';
+import Commande from '../models/commande.model.js'; // à adapter selon ton fichier modèle
+import Produit from '../models/produit.model.js';   // à adapter selon ton fichier modèle
 
 // Créer un carton
 export const createCarton = async (req, res) => {

@@ -1,5 +1,5 @@
-import Produit from '../models/Produit.js';
-import Categorie from '../models/Categorie.js'; // à créer si pas encore fait
+import Produit from '../models/produit.model.js';
+import Categorie from '../models/categorie.model.js'; // à créer si pas encore fait
 
 // ➕ Créer un produit
 export const createProduit = async (req, res) => {

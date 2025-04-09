@@ -1,5 +1,5 @@
 // controllers/categorieController.js
-import Categorie from '../models/Categorie.js';
+import Categorie from '../models/categorie.model.js';
 
 // Créer une nouvelle catégorie
 export const createCategorie = async (req, res) => {
