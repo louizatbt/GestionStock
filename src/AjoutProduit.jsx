@@ -4,6 +4,7 @@ import { useState } from "react"
 import profileLogo from "./assets/icon.png"
 import BarNavig from "./component/bar"
 import "./App.css"
+import axios from "axios"
 
 function AjoutProduit() {
   const [produit, setProduit] = useState({
@@ -22,10 +23,15 @@ function AjoutProduit() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     console.log("Produit ajouté:", produit)
-    // Ici vous ajouteriez la logique pour envoyer les données au serveur
+     alert("gfgfg")
+     try {
+       await axios.post("http://localhost:5000/api/produits" , produit)
+     } catch (error) {
+      
+     }
   }
 
   return (

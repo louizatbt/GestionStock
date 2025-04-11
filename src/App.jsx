@@ -19,11 +19,15 @@ import Connection from "./pages/auth/Connection"
 import Profile from "./pages/auth/Profile"
 import Scanner from "./pages/utils/Scanner"
 import "./App.css"
+import { Provider } from "react-redux"
+import { store } from "./reducer/store"
+import AjoutCategorie from "./pages/gestion/AjouterCategorie"
 
 function App() {
   return (
     <Router>
-      <Routes>
+       <Provider store={store}>
+       <Routes>
         {/* Pages d'authentification */}
         <Route path="/login" element={<Connection />} />
         <Route path="/profile" element={<Profile />} />
@@ -46,6 +50,7 @@ function App() {
         <Route path="/historique-stock" element={<HistoriqueStock />} />
         <Route path="/historique-produit" element={<HistoriqueProduit />} />
         <Route path="/ajout-produit" element={<AjoutProduit />} />
+        <Route path="/ajout-categorie" element={<AjoutCategorie />} />
 
         {/* Pages Gestionnaire */}
         <Route path="/accueil-gestionnaire" element={<AccueilGestionnaire />} />
@@ -56,6 +61,7 @@ function App() {
         {/* Redirection par défaut */}
         <Route path="/" element={<Navigate to="/login" replace />} />
       </Routes>
+       </Provider>
     </Router>
   )
 }

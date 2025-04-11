@@ -3,19 +3,13 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Header from "../../components/Header"
+import useAuth from "../../hooks/useAuth"
 
 export default function Profile() {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState("account")
-  const [user, setUser] = useState({
-    name: "Jean Dupont",
-    email: "jean.dupont@example.com",
-    role: "Gestionnaire",
-    department: "Logistique",
-    phone: "+33 6 12 34 56 78",
-    avatar: "/placeholder.svg?height=100&width=100",
-    lastLogin: "18 mars 2025, 14:30",
-  })
+   const {user} = useAuth()
+ 
 
   const handleLogout = () => {
     // Logique de déconnexion
@@ -33,7 +27,7 @@ export default function Profile() {
             <button className="edit-avatar-btn">✏️</button>
           </div>
 
-          <h2 className="profile-name">{user.name}</h2>
+          <h2 className="profile-name">{user.nom}</h2>
           <p className="profile-email">{user.email}</p>
 
           <div className="profile-badges">
@@ -90,7 +84,7 @@ export default function Profile() {
                 <div className="form-grid">
                   <div className="form-group">
                     <label>Nom complet</label>
-                    <input type="text" defaultValue={user.name} />
+                    <input type="text" defaultValue={user.nom} />
                   </div>
 
                   <div className="form-group">
@@ -100,7 +94,7 @@ export default function Profile() {
 
                   <div className="form-group">
                     <label>Téléphone</label>
-                    <input type="text" defaultValue={user.phone} />
+                    <input type="text" defaultValue={user.telephone} />
                   </div>
 
                   <div className="form-group">
